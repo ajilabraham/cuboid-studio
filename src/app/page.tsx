@@ -28,7 +28,7 @@ export default function Home() {
     offset: ["start start", "end end"],
   });
 
-  const backgroundColor = useTransform(scrollYProgress, [0.8, 1], ["#000000", "#FBF6F6"]);
+  const backgroundColor = useTransform(scrollYProgress, [0.8, 1], ["#000000", "#121212"]);
   const logoOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
   // Fade out the canvas/fixed elements as we approach the end of the sequence
   const canvasOpacity = useTransform(scrollYProgress, [0.9, 1], [1, 0]);
@@ -62,7 +62,7 @@ export default function Home() {
 
 
       {/* Rest of the Page Content */}
-      <div className="relative z-40 bg-[#FDFCF9] dark:bg-black">
+      <div className="relative z-40 bg-[#121212] -mt-32">
         <BoldModern />
         <MeticulousDesign />
         <HotelsRestaurants />
