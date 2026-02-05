@@ -49,6 +49,8 @@ const projects = [
 
 const CuboidSignatures = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const containerRef = React.useRef(null);
+    const isInView = useInView(containerRef, { margin: "-20%" }); // Removed once: true so it triggers on scroll up/down
 
     const handleNext = () => {
         setCurrentIndex((prev) => (prev + 1) % projects.length);
@@ -62,70 +64,9 @@ const CuboidSignatures = () => {
         setCurrentIndex(index);
     };
 
-    // Calculate which items to show. for a simple 5 item carousel
-    // we just render them all and animate positions
-
-    const getCardStyle = (index: number) => {
-        const diff = index - currentIndex;
-        // Adjust for seamless looping if we wanted, but for 5 items strictly coverflow
-        // it's easier to clamp or just let them go off screen. 
-        // Let's do a simple centered view where index 0 is center.
-
-        // We actually want strictly 3 visible maybe? Or 5 visible.
-        // Let's simple animate absolute positions based on 'diff'.
-
-        const center = 0;
-        const isActive = diff === 0;
-
-        // Configuration for positions
-        let x = 0;
-        let scale = 1;
-        let zIndex = 0;
-        let rotateY = 0;
-        let opacity = 1;
-
-        if (isActive) {
-            x = 0;
-            scale = 1.2;
-            zIndex = 20;
-            rotateY = 0;
-            opacity = 1;
-        } else if (diff === -1 || diff === 4) { // Left neighbor (wrap around)
-            x = -300; // Desktop offset
-            scale = 0.9;
-            zIndex = 10;
-            rotateY = 25;
-            opacity = 0.6;
-        } else if (diff === 1 || diff === -4) { // Right neighbor
-            x = 300;
-            scale = 0.9;
-            zIndex = 10;
-            rotateY = -25;
-            opacity = 0.6;
-        } else if (diff === -2 || diff === 3) { // Far Left
-            x = -550;
-            scale = 0.7;
-            zIndex = 5;
-            rotateY = 35;
-            opacity = 0.3;
-        } else if (diff === 2 || diff === -3) { // Far Right
-            x = 550;
-            scale = 0.7;
-            zIndex = 5;
-            rotateY = -35;
-            opacity = 0.3;
-        }
-
-        return { x, scale, zIndex, rotateY, opacity };
-    };
-
     // Helper to handle wrapping indices for styling logic
     const getWrappedDiff = (index: number) => {
         let diff = index - currentIndex;
-        // Normalize diff to simulate infinite loop feeling locally around center
-        // -2, -1, 0, 1, 2
-        // If total is 5. 
-        // if curr is 0. index 4 is diff 4. should be treated as -1.
         while (diff > 2) diff -= 5;
         while (diff < -2) diff += 5;
         return diff;
@@ -141,6 +82,7 @@ const CuboidSignatures = () => {
         let rotateY = 0;
         let opacity = 1;
         let brightness = 1;
+        let y: any = 0;
 
         if (isActive) {
             x = 0;
@@ -160,15 +102,27 @@ const CuboidSignatures = () => {
             rotateY = direction * -35; // Flip towards center
             opacity = absDiff > 2 ? 0 : 0.6; // Fade out far items
             brightness = 0.5;
+
+            // Entrance Animation: Fan out logic
+            if (!isInView) {
+                x = 0;
+                rotateY = 0;
+                opacity = 0;
+            }
+
+            // Floating Animation logic
+            if (isInView) {
+                y = [0, -15, 0]; // Increased float range slightly
+            }
         }
 
-        return { x, scale, zIndex, rotateY, opacity, brightness };
+        return { x, scale, zIndex, rotateY, opacity, brightness, y };
     };
 
     const activeProject = projects[currentIndex];
 
     return (
-        <section className="py-24 bg-[#F9F8F6] dark:bg-[#121212] overflow-hidden" id="signatures">
+        <section className="py-24 bg-[#F9F8F6] dark:bg-[#121212] overflow-hidden" id="signatures" ref={containerRef}>
             <div className="max-w-7xl mx-auto px-6 relative z-10">
                 <div className="text-center mb-16">
                     <h2 className="text-6xl md:text-7xl font-serif text-[#1F2937] dark:text-gray-100 mb-4 tracking-tight">
@@ -192,9 +146,14 @@ const CuboidSignatures = () => {
                                         zIndex: style.zIndex,
                                         rotateY: style.rotateY,
                                         opacity: style.opacity,
-                                        filter: `brightness(${style.brightness})`
+                                        filter: `brightness(${style.brightness})`,
+                                        y: style.y
                                     }}
-                                    transition={{ duration: 0.6, ease: "easeOut" }}
+                                    transition={{
+                                        x: { duration: 0.8, ease: "backOut" },
+                                        y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: index * 0.2 },
+                                        default: { duration: 0.6 }
+                                    }}
                                     onClick={() => handleCardClick(index)}
                                 >
                                     <div className="relative w-full h-full overflow-hidden border-4 border-white">
