@@ -96,7 +96,8 @@ const CuboidSignatures = () => {
             const direction = diff > 0 ? 1 : -1;
             const absDiff = Math.abs(diff);
 
-            x = direction * (200 + (absDiff * 140)); // Progressive spacing
+            // Adjusted spacing for smaller cards
+            x = direction * (160 + (absDiff * 100)); // Retracted spacing
             scale = 1 - (absDiff * 0.15); // Progressive scaling down
             zIndex = 20 - absDiff;
             rotateY = direction * -35; // Flip towards center
@@ -112,7 +113,7 @@ const CuboidSignatures = () => {
 
             // Floating Animation logic
             if (isInView) {
-                y = [0, -15, 0]; // Increased float range slightly
+                y = [0, -10, 0]; // Increased float range slightly
             }
         }
 
@@ -122,24 +123,24 @@ const CuboidSignatures = () => {
     const activeProject = projects[currentIndex];
 
     return (
-        <section className="py-24 bg-[#F9F8F6] dark:bg-[#121212] overflow-hidden" id="signatures" ref={containerRef}>
+        <section className="py-12 md:py-20 bg-[#F9F8F6] dark:bg-[#121212] overflow-hidden" id="signatures" ref={containerRef}>
             <div className="max-w-7xl mx-auto px-6 relative z-10">
-                <div className="text-center mb-16">
-                    <h2 className="text-6xl md:text-7xl font-serif text-[#1F2937] dark:text-gray-100 mb-4 tracking-tight">
+                <div className="text-center mb-8 md:mb-12">
+                    <h2 className="text-4xl md:text-6xl font-serif text-[#1F2937] dark:text-gray-100 mb-4 tracking-tight">
                         The Cuboid Signatures
                     </h2>
-                    <div className="w-24 h-1 bg-[#EAB308] mx-auto"></div>
+                    <div className="w-16 h-1 bg-[#EAB308] mx-auto"></div>
                 </div>
 
                 {/* 3D Carousel Area */}
-                <div className="relative h-[500px] flex items-center justify-center perspective-1000 mb-[-100px] md:mb-[-150px]">
+                <div className="relative h-[350px] md:h-[450px] flex items-center justify-center perspective-1000 mb-[-60px] md:mb-[-100px]">
                     <div className="relative w-full max-w-4xl h-full flex items-center justify-center">
                         {projects.map((project, index) => {
                             const style = getStyleForIndex(index);
                             return (
                                 <motion.div
                                     key={project.id}
-                                    className="absolute w-[300px] md:w-[400px] aspect-[3/4] rounded-sm shadow-2xl cursor-pointer bg-white"
+                                    className="absolute w-[220px] md:w-[320px] aspect-[3/4] rounded-sm shadow-2xl cursor-pointer bg-white"
                                     animate={{
                                         x: style.x,
                                         scale: style.scale,
@@ -171,63 +172,63 @@ const CuboidSignatures = () => {
                 </div>
             </div>
 
-            {/* Dark Details Panel */}
-            <div className="relative z-20 mx-auto max-w-5xl px-4">
-                <div className="bg-[#18181B] text-white rounded-3xl p-8 md:p-16 shadow-2xl relative overflow-hidden">
+            {/* Dark Details Panel - Compact */}
+            <div className="relative z-20 mx-auto max-w-4xl px-4">
+                <div className="bg-[#18181B] text-white rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden border border-white/5">
                     {/* Background noise/texture can be added here */}
 
                     <AnimatePresence mode='wait'>
                         <motion.div
                             key={activeProject.id}
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 15 }}
                             animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            transition={{ duration: 0.4 }}
-                            className="grid md:grid-cols-5 gap-12"
+                            exit={{ opacity: 0, y: -15 }}
+                            transition={{ duration: 0.3 }}
+                            className="grid md:grid-cols-5 gap-8 items-center"
                         >
                             {/* Left Content */}
                             <div className="md:col-span-3">
-                                <h3 className="text-[#EAB308] text-3xl md:text-4xl font-serif mb-6 uppercase tracking-wider">
+                                <h3 className="text-[#EAB308] text-2xl md:text-3xl font-serif mb-4 uppercase tracking-wider leading-tight">
                                     {activeProject.title}
                                 </h3>
-                                <p className="text-gray-300 leading-relaxed text-lg font-light mb-10">
+                                <p className="text-gray-300 leading-relaxed text-sm md:text-base font-light mb-6">
                                     {activeProject.description}
                                 </p>
 
-                                <button className="bg-[#EAB308] text-black px-8 py-4 font-bold text-sm tracking-widest uppercase hover:bg-white transition-colors duration-300 flex items-center gap-2">
+                                <button className="bg-[#EAB308] text-black px-6 py-3 font-bold text-xs tracking-widest uppercase hover:bg-white transition-colors duration-300 flex items-center gap-2">
                                     Explore Full Case Study
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-3">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                                     </svg>
                                 </button>
                             </div>
 
                             {/* Right Metadata */}
-                            <div className="md:col-span-2 flex flex-col justify-center border-l border-white/10 pl-8 md:pl-12 space-y-8">
+                            <div className="md:col-span-2 flex flex-col justify-center border-l-0 md:border-l border-white/10 pt-6 md:pt-0 md:pl-8 space-y-6">
                                 <div>
-                                    <h4 className="text-[#EAB308] text-xs font-bold uppercase tracking-widest mb-2">Project Scope</h4>
-                                    <p className="text-gray-400 font-light leading-relaxed">{activeProject.scope}</p>
+                                    <h4 className="text-[#EAB308] text-[10px] font-bold uppercase tracking-widest mb-1">Project Scope</h4>
+                                    <p className="text-gray-400 font-light leading-relaxed text-sm">{activeProject.scope}</p>
                                 </div>
                                 <div>
-                                    <h4 className="text-[#EAB308] text-xs font-bold uppercase tracking-widest mb-2">Completion</h4>
-                                    <p className="text-gray-400 font-light">{activeProject.completion}</p>
+                                    <h4 className="text-[#EAB308] text-[10px] font-bold uppercase tracking-widest mb-1">Completion</h4>
+                                    <p className="text-gray-400 font-light text-sm">{activeProject.completion}</p>
                                 </div>
 
                                 {/* Navigation Controls */}
-                                <div className="flex gap-4 pt-4">
+                                <div className="flex gap-3 pt-4">
                                     <button
                                         onClick={handlePrev}
-                                        className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-black transition-all hover:border-white"
+                                        className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-black transition-all hover:border-white"
                                     >
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
                                         </svg>
                                     </button>
                                     <button
                                         onClick={handleNext}
-                                        className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-black transition-all hover:border-white"
+                                        className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-black transition-all hover:border-white"
                                     >
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                                         </svg>
                                     </button>
