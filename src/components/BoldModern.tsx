@@ -12,8 +12,8 @@ const BoldModern = () => {
                 priority
             />
             <div className="relative z-10 text-center px-6">
-                <h1 className="text-[clamp(3rem,10vw,8rem)] font-serif text-white leading-tight mb-6 uppercase tracking-tighter">
-                    Bold & Modern<br />Architecture
+                <h1 className="text-[clamp(1.5rem,5vw,5rem)] font-serif text-white leading-tight mb-6 uppercase tracking-wider">
+                    Modern, Sustainable, Precise, <span className="text-[#EAB308]">Cuboid</span>
                 </h1>
                 <div className="w-24 h-px bg-[#EAB308] mx-auto"></div>
             </div>
