@@ -7,43 +7,43 @@ import Image from 'next/image';
 const projects = [
     {
         id: 1,
-        title: "L'HERITAGE GRANDE — DUBAI",
-        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBFDIrBsIHZ7FIkfpfkbpjaZE6kScSZVldkaF8Rky8vF4fiiu0Gs8MNYH0caL8mfF6yvPhj3aVAsbYjv_2BSIM9PNaiVhGQaorT8rq3Ex02fX-5D1eEJKmPj26m8W2utbVIn3bbqatfFXatRzB_p4y_a3P5dJ1mTl-zqBvNvRMAvMA7YOsILZUiS5CM0aVRjHcs5S0jze-c-Sp8AT7VXa0-OlRTw8Na4GdHmQtoUGM1vlLhWOVyCW1EaondjOeNa9IVUOyqh2GqGwI", // Using the bold modern image as placeholder
-        description: "A masterful reinterpretation of classical architectural forms, L'Heritage Grande merges the majesty of traditional arches with high-performance modern materials. The resort creates a rhythmic procession of light and shadow, defining a new paradigm for luxury hospitality in the heart of the desert.",
-        scope: "Exterior Architecture, Interior Curation, Landscape Integration",
-        completion: "December 2023"
+        title: "THE MALABAR BISTRO — KERALA",
+        image: "/images/signatures/heritage-bistro.jpg",
+        description: "A nostalgic reinvention of the classic bistro. Checkered floors meet traditional Kerala mural art, creating a space that honors local heritage while serving contemporary culinary experiences. The lighting design highlights the intricate ceiling patterns.",
+        scope: "Interior Design, Art Curation, Lighting",
+        completion: "October 2023"
     },
     {
         id: 2,
-        title: "AZURE HORIZON — MALDIVES",
-        image: "/images/cuboid-logo.jpg", // Placeholder
-        description: "Suspended between sky and sea, Azure Horizon redefines overwater living. Using sustainable engineered timber and glass, the structures disappear into the landscape, offering an immersive connection with the ocean while ensuring complete privacy and structural resilience.",
-        scope: "Master Planning, Structural Design, Interior Architecture",
-        completion: "August 2024"
+        title: "SKYLINE PENTHOUSE — ONTARIO",
+        image: "/images/signatures/condo-living.jpg",
+        description: "Modern luxury defined by clean lines and panoramic views. This Toronto residence uses a cool color palette with deep red accents to create warmth in a high-rise setting. The custom circular light fixture serves as a sculptural centerpiece.",
+        scope: "Residential Interiors, Custom Furniture",
+        completion: "February 2024"
     },
     {
         id: 3,
-        title: "URBAN SANCTUARY — TOKYO",
-        image: "/images/cuboid-logo-footer.jpg", // Placeholder
-        description: "A brutalist concrete shell encasing a serene wooden core. This vertical retreat in the bustle of Tokyo uses light wells and internal gardens to create a self-contained ecosystem of calm. Japanese minimalism meets industrial precision.",
-        scope: "Architecture, Interior Design, bespoke Furniture",
-        completion: "January 2023"
+        title: "THE OPEN COURTYARD — KERALA",
+        image: "/images/signatures/courtyard-lounge.jpg",
+        description: "Blurring the lines between indoors and outdoors. This airy lounge features a cascading green ceiling and industrial-chic metalwork. Large-scale wall art adds vibrancy, making it a dynamic social hub in the heart of the city.",
+        scope: "Commercial Architecture, Landscape Integration",
+        completion: "December 2023"
     },
     {
         id: 4,
-        title: "THE GLASS PAVILION — MILAN",
-        image: "/images/automotive-pavilion.jpg", // Placeholder
-        description: "Designed for high-end automotive display, the Glass Pavilion eliminates visual barriers. A cantilevered roof floats above seamless curved glass walls, putting the focus entirely on the machines within while managing thermal performance through active shading systems.",
-        scope: "Showroom Design, Structural Engineering",
-        completion: "November 2023"
+        title: "VERDANT DINING — KERALA",
+        image: "/images/signatures/green-dining.jpg",
+        description: "A celebration of texture and tone. The geometric wall paneling in sage green complements the warm wood tones and patterned upholstery. It's a study in balancing acoustic comfort with visual sophistication.",
+        scope: "Interior Architecture, Bespoke Joinery",
+        completion: "January 2024"
     },
     {
         id: 5,
-        title: "VERTEX TOWER — NEW YORK",
-        image: "/images/executive-suite.png", // Placeholder
-        description: "A mixed-use development that challenges the boxy skyline. Faceted glass panels reflect the changing city light, while internal atriums provide community spaces at altitude. A study in vertical connectivity and sustainable urban density.",
-        scope: "Facade Engineering, Public Space Design",
-        completion: "March 2025"
+        title: "TWILIGHT LOUNGE — KERALA",
+        image: "/images/signatures/night-patio.jpg",
+        description: "An atmospheric evening retreat. The traditional timber ceiling structure contrasts with the modern chalkboard art wall. Low-level ambient lighting creates an intimate mood perfect for conversation and relaxation.",
+        scope: "Hospitality Design, Structural Styling",
+        completion: "November 2023"
     }
 ];
 
