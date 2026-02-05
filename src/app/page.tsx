@@ -11,6 +11,7 @@ import ScrollIndicator from "@/components/ScrollIndicator";
 import Image from "next/image";
 
 import BoldModern from "@/components/BoldModern";
+import CuboidSignatures from "@/components/CuboidSignatures";
 import MeticulousDesign from "@/components/MeticulousDesign";
 import HotelsRestaurants from "@/components/HotelsRestaurants";
 import DiscoveryToDelivery from "@/components/DiscoveryToDelivery";
@@ -65,6 +66,7 @@ export default function Home() {
       <div className="relative z-40 bg-[#121212] -mt-32">
         <BoldModern />
         <MeticulousDesign />
+        <CuboidSignatures />
         <HotelsRestaurants />
         <DiscoveryToDelivery />
         <ProjectGrid />
