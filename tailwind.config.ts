@@ -12,6 +12,9 @@ const config: Config = {
         ivory: "#FBF6F6",
         black: "#000000",
         gold: "#FFB800",
+        "gold-accent": "#EBB034",
+        charcoal: "#1A1A1A",
+        "off-white": "#FDFDFD",
       },
       fontFamily: {
         sans: ["var(--font-bebas)", "sans-serif"],

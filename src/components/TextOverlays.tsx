@@ -43,7 +43,7 @@ export default function TextOverlays({ progress }: Props) {
                 <h2 className={textClasses}>Balance holds the magic.</h2>
             </motion.div>
             <motion.div style={{ opacity: opacity5 }} className={commonClasses}>
-                <h2 className={textClasses}>This is how Cuboid spaces begin.</h2>
+                <h2 className={textClasses}>This is how <span className="text-[#EAB308]">Cuboid</span> spaces begin.</h2>
             </motion.div>
         </>
     );
