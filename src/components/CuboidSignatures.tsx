@@ -86,7 +86,7 @@ const CuboidSignatures = () => {
 
         if (isActive) {
             x = 0;
-            scale = 1.15;
+            scale = 1.1; // Slightly less scale up
             zIndex = 30;
             rotateY = 0;
             opacity = 1;
@@ -96,24 +96,24 @@ const CuboidSignatures = () => {
             const direction = diff > 0 ? 1 : -1;
             const absDiff = Math.abs(diff);
 
-            // Adjusted spacing for smaller cards
-            x = direction * (160 + (absDiff * 100)); // Retracted spacing
-            scale = 1 - (absDiff * 0.15); // Progressive scaling down
+            // Wider spacing for landscape cards
+            x = direction * (240 + (absDiff * 120));
+            scale = 1 - (absDiff * 0.15);
             zIndex = 20 - absDiff;
-            rotateY = direction * -35; // Flip towards center
-            opacity = absDiff > 2 ? 0 : 0.6; // Fade out far items
+            rotateY = direction * -30; // Slightly less rotation
+            opacity = absDiff > 2 ? 0 : 0.6;
             brightness = 0.5;
 
-            // Entrance Animation: Fan out logic
+            // Entrance Animation
             if (!isInView) {
                 x = 0;
                 rotateY = 0;
                 opacity = 0;
             }
 
-            // Floating Animation logic
+            // Floating Animation
             if (isInView) {
-                y = [0, -10, 0]; // Increased float range slightly
+                y = [0, -8, 0];
             }
         }
 
@@ -123,24 +123,24 @@ const CuboidSignatures = () => {
     const activeProject = projects[currentIndex];
 
     return (
-        <section className="py-12 md:py-20 bg-[#F9F8F6] dark:bg-[#121212] overflow-hidden" id="signatures" ref={containerRef}>
+        <section className="py-8 md:py-16 bg-[#F9F8F6] dark:bg-[#121212] overflow-hidden" id="signatures" ref={containerRef}>
             <div className="max-w-7xl mx-auto px-6 relative z-10">
-                <div className="text-center mb-8 md:mb-12">
-                    <h2 className="text-4xl md:text-6xl font-serif text-[#1F2937] dark:text-gray-100 mb-4 tracking-tight">
+                <div className="text-center mb-6 md:mb-10">
+                    <h2 className="text-3xl md:text-5xl font-serif text-[#1F2937] dark:text-gray-100 mb-3 tracking-tight">
                         The Cuboid Signatures
                     </h2>
                     <div className="w-16 h-1 bg-[#EAB308] mx-auto"></div>
                 </div>
 
-                {/* 3D Carousel Area */}
-                <div className="relative h-[350px] md:h-[450px] flex items-center justify-center perspective-1000 mb-[-60px] md:mb-[-100px]">
-                    <div className="relative w-full max-w-4xl h-full flex items-center justify-center">
+                {/* 3D Carousel Area - Landscape Optimized */}
+                <div className="relative h-[250px] md:h-[350px] flex items-center justify-center perspective-1000 mb-[-40px] md:mb-[-80px]">
+                    <div className="relative w-full max-w-6xl h-full flex items-center justify-center">
                         {projects.map((project, index) => {
                             const style = getStyleForIndex(index);
                             return (
                                 <motion.div
                                     key={project.id}
-                                    className="absolute w-[220px] md:w-[320px] aspect-[3/4] rounded-sm shadow-2xl cursor-pointer bg-white"
+                                    className="absolute w-[280px] md:w-[480px] aspect-[16/10] rounded-sm shadow-2xl cursor-pointer bg-white"
                                     animate={{
                                         x: style.x,
                                         scale: style.scale,
@@ -172,66 +172,71 @@ const CuboidSignatures = () => {
                 </div>
             </div>
 
-            {/* Dark Details Panel - Compact */}
-            <div className="relative z-20 mx-auto max-w-4xl px-4">
-                <div className="bg-[#18181B] text-white rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden border border-white/5">
-                    {/* Background noise/texture can be added here */}
+            {/* Dark Details Panel - Extra Wide & Low Profile */}
+            <div className="relative z-20 mx-auto max-w-6xl px-4">
+                <div className="bg-[#18181B] text-white rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden border border-white/5">
 
                     <AnimatePresence mode='wait'>
                         <motion.div
                             key={activeProject.id}
-                            initial={{ opacity: 0, y: 15 }}
+                            initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -15 }}
+                            exit={{ opacity: 0, y: -10 }}
                             transition={{ duration: 0.3 }}
-                            className="grid md:grid-cols-5 gap-8 items-center"
+                            className="grid md:grid-cols-6 gap-8 items-center"
                         >
                             {/* Left Content */}
-                            <div className="md:col-span-3">
-                                <h3 className="text-[#EAB308] text-2xl md:text-3xl font-serif mb-4 uppercase tracking-wider leading-tight">
+                            <div className="md:col-span-4">
+                                <h3 className="text-[#EAB308] text-xl md:text-2xl font-serif mb-3 uppercase tracking-wider leading-tight">
                                     {activeProject.title}
                                 </h3>
-                                <p className="text-gray-300 leading-relaxed text-sm md:text-base font-light mb-6">
+                                <p className="text-gray-300 leading-relaxed text-sm font-light mb-4 max-w-2xl">
                                     {activeProject.description}
                                 </p>
 
-                                <button className="bg-[#EAB308] text-black px-6 py-3 font-bold text-xs tracking-widest uppercase hover:bg-white transition-colors duration-300 flex items-center gap-2">
-                                    Explore Full Case Study
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-3">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                                    </svg>
-                                </button>
-                            </div>
-
-                            {/* Right Metadata */}
-                            <div className="md:col-span-2 flex flex-col justify-center border-l-0 md:border-l border-white/10 pt-6 md:pt-0 md:pl-8 space-y-6">
-                                <div>
-                                    <h4 className="text-[#EAB308] text-[10px] font-bold uppercase tracking-widest mb-1">Project Scope</h4>
-                                    <p className="text-gray-400 font-light leading-relaxed text-sm">{activeProject.scope}</p>
-                                </div>
-                                <div>
-                                    <h4 className="text-[#EAB308] text-[10px] font-bold uppercase tracking-widest mb-1">Completion</h4>
-                                    <p className="text-gray-400 font-light text-sm">{activeProject.completion}</p>
-                                </div>
-
-                                {/* Navigation Controls */}
-                                <div className="flex gap-3 pt-4">
-                                    <button
-                                        onClick={handlePrev}
-                                        className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-black transition-all hover:border-white"
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-                                        </svg>
-                                    </button>
-                                    <button
-                                        onClick={handleNext}
-                                        className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-black transition-all hover:border-white"
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                                <div className="flex gap-6 items-center">
+                                    <button className="text-[#EAB308] font-bold text-xs tracking-widest uppercase hover:text-white transition-colors duration-300 flex items-center gap-2">
+                                        View Case Study
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-3">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                                         </svg>
                                     </button>
+                                </div>
+                            </div>
+
+                            {/* Right Metadata */}
+                            <div className="md:col-span-2 flex flex-col justify-center border-l-0 md:border-l border-white/10 pt-4 md:pt-0 md:pl-6 space-y-4">
+                                <div className="grid grid-cols-2 md:grid-cols-1 gap-4">
+                                    <div>
+                                        <h4 className="text-[#EAB308] text-[10px] font-bold uppercase tracking-widest mb-1">Scope</h4>
+                                        <p className="text-gray-400 font-light leading-tight text-xs">{activeProject.scope}</p>
+                                    </div>
+                                    <div>
+                                        <h4 className="text-[#EAB308] text-[10px] font-bold uppercase tracking-widest mb-1">Completion</h4>
+                                        <p className="text-gray-400 font-light text-xs">{activeProject.completion}</p>
+                                    </div>
+                                </div>
+
+                                {/* Navigation UI */}
+                                <div className="flex gap-2 justify-start md:justify-end">
+                                    <div className="flex gap-2">
+                                        <button
+                                            onClick={handlePrev}
+                                            className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-black transition-all hover:border-white"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-3 h-3">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                                            </svg>
+                                        </button>
+                                        <button
+                                            onClick={handleNext}
+                                            className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-black transition-all hover:border-white"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-3 h-3">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                                            </svg>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </motion.div>
