@@ -22,8 +22,8 @@ export default function TextOverlays({ progress }: Props) {
     // 4: "Balance holds the magic."
     const opacity4 = useTransform(progress, [0.65, 0.7, 0.75, 0.8], [0, 1, 1, 0]);
 
-    // 5: "This is how spaces begin." (Towards end)
-    const opacity5 = useTransform(progress, [0.85, 0.9, 0.95, 0.98], [0, 1, 1, 0]);
+    // 5. "This is how spaces begin." (Towards end)
+    const opacity5 = useTransform(progress, [0.85, 0.9, 0.99, 1], [0, 1, 1, 0]);
 
     const commonClasses = "absolute inset-0 flex items-center justify-center pointer-events-none p-4";
     const textClasses = "text-5xl md:text-7xl lg:text-9xl font-bold uppercase text-center text-ivory tracking-tighter drop-shadow-2xl";

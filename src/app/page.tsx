@@ -31,7 +31,7 @@ export default function Home() {
   const backgroundColor = useTransform(scrollYProgress, [0.8, 1], ["#000000", "#121212"]);
   const logoOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
   // Fade out the canvas/fixed elements as we approach the end of the sequence
-  const canvasOpacity = useTransform(scrollYProgress, [0.9, 1], [1, 0]);
+  const canvasOpacity = useTransform(scrollYProgress, [0.95, 1], [1, 0]);
 
   return (
     <motion.main style={{ backgroundColor }} className="min-h-screen">
