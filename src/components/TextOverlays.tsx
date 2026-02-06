@@ -31,19 +31,26 @@ export default function TextOverlays({ progress }: Props) {
     return (
         <>
             <motion.div style={{ opacity: opacity1 }} className={commonClasses}>
-                <h2 className={textClasses}>From nothingness, intent.</h2>
+                <h2 className={textClasses}>From nothingness, intent</h2>
             </motion.div>
             <motion.div style={{ opacity: opacity2 }} className={commonClasses}>
-                <h2 className={textClasses}>Ideas begin to lean in.</h2>
+                <h2 className={textClasses}>Ideas begin to lean in</h2>
             </motion.div>
             <motion.div style={{ opacity: opacity3 }} className={commonClasses}>
-                <h2 className={textClasses}>Precision finds its place.</h2>
+                <h2 className={textClasses}>Precision finds its place</h2>
             </motion.div>
             <motion.div style={{ opacity: opacity4 }} className={commonClasses}>
-                <h2 className={textClasses}>Balance holds the magic.</h2>
+                <h2 className={textClasses}>Balance holds the magic</h2>
             </motion.div>
             <motion.div style={{ opacity: opacity5 }} className={commonClasses}>
-                <h2 className={textClasses}>This is how <span className="text-[#EAB308]">Cuboid</span> spaces begin.</h2>
+                <h2 className={textClasses} style={{ lineHeight: '1.1' }}>
+                    <span className="block">
+                        <span className="text-[#F59E0B] drop-shadow-[0_0_25px_rgba(245,158,11,0.8)] brightness-110">Country</span> Soul,
+                    </span>
+                    <span className="block">
+                        <span className="text-[#F59E0B] drop-shadow-[0_0_25px_rgba(245,158,11,0.8)] brightness-110">Lab</span> Precision
+                    </span>
+                </h2>
             </motion.div>
         </>
     );

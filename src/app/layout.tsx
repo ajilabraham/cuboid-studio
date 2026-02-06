@@ -10,7 +10,7 @@ const bebas = Bebas_Neue({
 });
 
 export const metadata: Metadata = {
-  title: "Cuboid Studio",
+  title: "Country Lab",
   description: "Spaces designed with intent.",
 };
 

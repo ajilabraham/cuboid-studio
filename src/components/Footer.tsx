@@ -5,7 +5,7 @@ const Footer = () => {
     return (
         <>
             {/* Infinite Marquee Section */}
-            <div className="bg-[#EAB308] text-[#1F2937] py-12 overflow-hidden whitespace-nowrap">
+            <div className="bg-[#FFB800] text-[#1F2937] py-12 overflow-hidden whitespace-nowrap">
                 <div className="inline-block animate-marquee flex items-center">
                     <span className="text-2xl font-serif mx-12 uppercase italic">A' Design Award Gold 2024</span>
                     {/* Star Icon */}
@@ -28,24 +28,24 @@ const Footer = () => {
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="grid md:grid-cols-4 gap-16 mb-24">
                         <div className="md:col-span-2">
-                            <div className="w-48 h-24 relative mb-10">
+                            <div className="w-96 h-48 relative mb-10">
                                 <Image
-                                    src="/images/cuboid-updated-logo.jpg"
-                                    alt="CUBOID STUDIO"
+                                    src="/cuboid-logo.png"
+                                    alt="COUNTRY LAB"
                                     fill
                                     className="object-contain object-left"
                                 />
                             </div>
-                            <h3 className="text-4xl md:text-5xl font-serif mb-8 leading-tight">Ready to redefine your <span className="text-[#EAB308]">hospitality space?</span></h3>
+                            <h3 className="text-4xl md:text-5xl font-serif mb-8 leading-tight">Ready to redefine your <span className="text-[#FFB800]">hospitality space?</span></h3>
                             <p className="text-gray-400 font-light max-w-sm mb-10">From initial sketch to the final brick, we are your partners in creating world-class destinations.</p>
                             <div className="flex space-x-6">
-                                <a className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#EAB308] hover:border-[#EAB308] transition-all font-bold text-xs" href="#">FB</a>
-                                <a className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#EAB308] hover:border-[#EAB308] transition-all font-bold text-xs" href="#">IG</a>
-                                <a className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#EAB308] hover:border-[#EAB308] transition-all font-bold text-xs" href="#">LI</a>
+                                <a className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#FFB800] hover:border-[#FFB800] transition-all font-bold text-xs" href="#">FB</a>
+                                <a className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#FFB800] hover:border-[#FFB800] transition-all font-bold text-xs" href="#">IG</a>
+                                <a className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#FFB800] hover:border-[#FFB800] transition-all font-bold text-xs" href="#">LI</a>
                             </div>
                         </div>
                         <div>
-                            <h4 className="text-[#EAB308] uppercase tracking-widest text-xs font-bold mb-8">Navigation</h4>
+                            <h4 className="text-[#FFB800] uppercase tracking-widest text-xs font-bold mb-8">Navigation</h4>
                             <ul className="space-y-4 font-light text-gray-300">
                                 <li><a className="hover:text-white transition-colors" href="#">Architecture Portfolio</a></li>
                                 <li><a className="hover:text-white transition-colors" href="#">Interior Design</a></li>
@@ -55,17 +55,17 @@ const Footer = () => {
                             </ul>
                         </div>
                         <div>
-                            <h4 className="text-[#EAB308] uppercase tracking-widest text-xs font-bold mb-8">Headquarters</h4>
+                            <h4 className="text-[#FFB800] uppercase tracking-widest text-xs font-bold mb-8">Headquarters</h4>
                             <address className="not-italic text-gray-300 font-light leading-loose">
-                                Ground Floor, Melka Tower<br />
-                                Cheruparampath Road, Kadavanthra<br />
-                                Cochin 682020, Kerala, India<br /><br />
-                                <a className="text-white border-b border-[#EAB308] pb-1" href="mailto:hello@cuboidstudio.com">hello@cuboidstudio.com</a>
+                                45 Queen Street West<br />
+                                Toronto, ON M5H 2N2<br />
+                                Ontario, Canada<br /><br />
+                                <a className="text-white border-b border-[#FFB800] pb-1" href="mailto:hello@countrylab.ca">hello@countrylab.ca</a>
                             </address>
                         </div>
                     </div>
                     <div className="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-white/10 text-gray-500 text-xs tracking-widest uppercase">
-                        <p>© 2026 Cuboid Studio. All architectural rights reserved.</p>
+                        <p>© 2026 Country Lab. All architectural rights reserved.</p>
                         <div className="mt-4 md:mt-0 flex items-center gap-2">
                             Design Excellence for the Contemporary Era
                         </div>

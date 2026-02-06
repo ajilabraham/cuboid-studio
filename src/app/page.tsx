@@ -45,10 +45,10 @@ export default function Home() {
         <motion.div style={{ opacity: canvasOpacity }} className="sticky top-0 h-screen w-full overflow-hidden">
           <CuboidCanvas scrollYProgress={scrollYProgress} />
           <motion.div style={{ opacity: logoOpacity }} className="absolute top-4 left-4 md:top-8 md:left-8 z-40 pointer-events-none">
-            <div className="relative w-44 h-22 md:w-64 md:h-32">
+            <div className="relative w-[13.2rem] h-[6.6rem] md:w-[19.2rem] md:h-[9.6rem]">
               <Image
-                src="/images/cuboid-logo.jpg"
-                alt="Cuboid Studio"
+                src="/cuboid-logo.png"
+                alt="Country Lab"
                 fill
                 className="object-contain"
                 priority

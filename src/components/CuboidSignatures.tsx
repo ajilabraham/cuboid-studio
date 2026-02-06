@@ -127,9 +127,9 @@ const CuboidSignatures = () => {
             <div className="max-w-7xl mx-auto px-6 relative z-10">
                 <div className="text-center mb-6 md:mb-10">
                     <h2 className="text-3xl md:text-5xl font-serif text-[#1F2937] dark:text-gray-100 mb-3 tracking-tight">
-                        The Cuboid Signatures
+                        The Country Lab Signatures
                     </h2>
-                    <div className="w-16 h-1 bg-[#EAB308] mx-auto"></div>
+                    <div className="w-16 h-1 bg-[#FFB800] mx-auto"></div>
                 </div>
 
                 {/* 3D Carousel Area - Landscape Optimized */}
@@ -187,7 +187,7 @@ const CuboidSignatures = () => {
                         >
                             {/* Left Content */}
                             <div className="md:col-span-4">
-                                <h3 className="text-[#EAB308] text-xl md:text-2xl font-serif mb-3 uppercase tracking-wider leading-tight">
+                                <h3 className="text-[#FFB800] text-xl md:text-2xl font-serif mb-3 uppercase tracking-wider leading-tight">
                                     {activeProject.title}
                                 </h3>
                                 <p className="text-gray-300 leading-relaxed text-sm font-light mb-4 max-w-2xl">
@@ -195,7 +195,7 @@ const CuboidSignatures = () => {
                                 </p>
 
                                 <div className="flex gap-6 items-center">
-                                    <button className="text-[#EAB308] font-bold text-xs tracking-widest uppercase hover:text-white transition-colors duration-300 flex items-center gap-2">
+                                    <button className="text-[#FFB800] font-bold text-xs tracking-widest uppercase hover:text-white transition-colors duration-300 flex items-center gap-2">
                                         View Case Study
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-3">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
@@ -208,11 +208,11 @@ const CuboidSignatures = () => {
                             <div className="md:col-span-2 flex flex-col justify-center border-l-0 md:border-l border-white/10 pt-4 md:pt-0 md:pl-6 space-y-4">
                                 <div className="grid grid-cols-2 md:grid-cols-1 gap-4">
                                     <div>
-                                        <h4 className="text-[#EAB308] text-[10px] font-bold uppercase tracking-widest mb-1">Scope</h4>
+                                        <h4 className="text-[#FFB800] text-[10px] font-bold uppercase tracking-widest mb-1">Scope</h4>
                                         <p className="text-gray-400 font-light leading-tight text-xs">{activeProject.scope}</p>
                                     </div>
                                     <div>
-                                        <h4 className="text-[#EAB308] text-[10px] font-bold uppercase tracking-widest mb-1">Completion</h4>
+                                        <h4 className="text-[#FFB800] text-[10px] font-bold uppercase tracking-widest mb-1">Completion</h4>
                                         <p className="text-gray-400 font-light text-xs">{activeProject.completion}</p>
                                     </div>
                                 </div>

@@ -13,9 +13,9 @@ const BoldModern = () => {
             />
             <div className="relative z-10 text-center px-6">
                 <h1 className="text-[clamp(1.5rem,5vw,5rem)] font-serif text-[#FFFBEB] font-bold leading-tight mb-6 uppercase tracking-wider">
-                    Modern, Sustainable, Precise, <span className="text-[#EAB308]">Cuboid</span>
+                    Modern, Sustainable, Precise, <span className="text-[#FFB800]">Country Lab</span>
                 </h1>
-                <div className="w-24 h-px bg-[#EAB308] mx-auto"></div>
+                <div className="w-24 h-px bg-[#FFB800] mx-auto"></div>
             </div>
         </section>
     );
