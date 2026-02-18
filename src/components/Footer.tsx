@@ -50,10 +50,9 @@ const Footer = () => {
                         <div>
                             <h4 className="text-[#FFB800] uppercase tracking-widest text-xs font-bold mb-8">Headquarters</h4>
                             <address className="not-italic text-gray-300 font-light leading-loose">
-                                45 Queen Street West<br />
-                                Toronto, ON M5H 2N2<br />
-                                Ontario, Canada<br /><br />
-                                <a className="text-white border-b border-[#FFB800] pb-1" href="mailto:hello@countrylab.ca">hello@countrylab.ca</a>
+                                Unit 40, 3883 Quartz Rd,<br />
+                                Mississauga, ON L5B 0M4<br /><br />
+                                <a className="text-white border-b border-[#FFB800] pb-1" href="mailto:hello@countrylabinteriors.com">hello@countrylabinteriors.com</a>
                             </address>
                         </div>
                     </div>
