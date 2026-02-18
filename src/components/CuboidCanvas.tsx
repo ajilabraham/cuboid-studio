@@ -15,31 +15,47 @@ export default function CuboidCanvas({ scrollYProgress }: Props) {
     // Map progress to frame index (0 to 278)
     const frameIndex = useTransform(scrollYProgress, [0, 1], [0, 278]);
 
-    // Preload Images with Batching
+    // Preload Images with Progressive Loading
     useEffect(() => {
         const loadImages = async () => {
-            const loadedImages: HTMLImageElement[] = [];
+            const totalFrames = 279;
+            const initialBuffer = 50; // Load first 50 frames before showing UI
             const batchSize = 10;
+            const loadedCache: HTMLImageElement[] = new Array(totalFrames).fill(undefined);
 
-            for (let i = 1; i <= 279; i += batchSize) {
-                const promises = [];
-                for (let j = i; j < i + batchSize && j <= 279; j++) {
-                    promises.push(
-                        new Promise<void>((resolve) => {
-                            const img = new Image();
-                            const fileName = `ffout${j.toString().padStart(3, "0")}.gif`;
-                            img.src = `/images/CuboidGIF/${fileName}`;
-                            img.onload = () => resolve();
-                            img.onerror = () => resolve(); // Fail gracefully
-                            loadedImages[j - 1] = img;
-                        })
-                    );
-                }
-                await Promise.all(promises);
+            const loadImage = (index: number) => new Promise<void>((resolve) => {
+                const img = new Image();
+                const fileName = `ffout${index.toString().padStart(3, "0")}.gif`;
+                img.src = `/images/CuboidGIF/${fileName}`;
+                img.onload = () => {
+                    loadedCache[index - 1] = img;
+                    resolve();
+                };
+                img.onerror = () => {
+                    console.error(`Failed to load image: ${fileName}`);
+                    resolve();
+                };
+            });
+
+            // 1. Load Initial Buffer
+            const initialPromises = [];
+            for (let i = 1; i <= initialBuffer; i++) {
+                initialPromises.push(loadImage(i));
             }
+            await Promise.all(initialPromises);
 
-            setImages(loadedImages);
-            setIsLoaded(true);
+            setImages([...loadedCache]);
+            setIsLoaded(true); // Unblock UI immediately after buffer is ready
+
+            // 2. Background Load Remaining Frames
+            for (let i = initialBuffer + 1; i <= totalFrames; i += batchSize) {
+                const batchPromises = [];
+                for (let j = i; j < i + batchSize && j <= totalFrames; j++) {
+                    batchPromises.push(loadImage(j));
+                }
+                await Promise.all(batchPromises);
+                setImages([...loadedCache]); // Update state progressively
+            }
         };
 
         loadImages();
