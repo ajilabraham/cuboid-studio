@@ -28,15 +28,8 @@ const Footer = () => {
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="grid md:grid-cols-4 gap-16 mb-24">
                         <div className="md:col-span-2">
-                            <div className="w-96 h-48 relative mb-10">
-                                <Image
-                                    src="/cuboid-logo.png"
-                                    alt="COUNTRY LAB"
-                                    fill
-                                    className="object-contain object-left"
-                                />
-                            </div>
-                            <h3 className="text-4xl md:text-5xl font-serif mb-8 leading-tight">Ready to redefine your <span className="text-[#FFB800]">hospitality space?</span></h3>
+
+                            <h3 className="text-4xl md:text-5xl font-serif mb-8 leading-tight">Ready to redefine your <span className="text-[#FFB800]">interiors?</span></h3>
                             <p className="text-gray-400 font-light max-w-sm mb-10">From initial sketch to the final brick, we are your partners in creating world-class destinations.</p>
                             <div className="flex space-x-6">
                                 <a className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#FFB800] hover:border-[#FFB800] transition-all font-bold text-xs" href="#">FB</a>

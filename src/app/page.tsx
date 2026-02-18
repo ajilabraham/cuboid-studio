@@ -31,7 +31,6 @@ export default function Home() {
   });
 
   const backgroundColor = useTransform(scrollYProgress, [0.8, 1], ["#000000", "#121212"]);
-  const logoOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
   // Fade out the canvas/fixed elements as we approach the end of the sequence
   const canvasOpacity = useTransform(scrollYProgress, [0.95, 1], [1, 0]);
 
@@ -44,17 +43,6 @@ export default function Home() {
       <div ref={containerRef} className="relative h-[1400vh] z-20">
         <motion.div style={{ opacity: canvasOpacity }} className="sticky top-0 h-screen w-full overflow-hidden">
           <CuboidCanvas scrollYProgress={scrollYProgress} />
-          <motion.div style={{ opacity: logoOpacity }} className="absolute top-4 left-4 md:top-8 md:left-8 z-40 pointer-events-none">
-            <div className="relative w-[13.2rem] h-[6.6rem] md:w-[19.2rem] md:h-[9.6rem]">
-              <Image
-                src="/cuboid-logo.png"
-                alt="Country Lab"
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
-          </motion.div>
           <ScrollIndicator progress={scrollYProgress} />
           <TextOverlays progress={scrollYProgress} />
         </motion.div>
