@@ -143,6 +143,7 @@ const ContactMap = () => {
                         tilt: 55,
                         heading: 0,
                         range: 400,
+                        mode: 'HYBRID', // Required by recent API updates to avoid infinite spinner
                         "default-labels-disabled": true,
                         style: { width: '100%', height: '100%', display: 'block' }
                     },
