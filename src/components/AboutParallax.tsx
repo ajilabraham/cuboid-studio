@@ -45,7 +45,7 @@ const AboutParallax = () => {
 
                     <div className="space-y-6 text-gray-100 font-light leading-relaxed text-lg md:text-xl">
                         <p>
-                            Welcome to <strong>Country Lab</strong>, Ontario’s premier studio where rustic warmth meets clinical precision.
+                            Welcome to <strong>Country Lab</strong> where rustic warmth meets lab precision.
                         </p>
                         <p>
                             Whether we are crafting an intimate residential sanctuary or a high-performance commercial environment, our approach remains the same: a meticulous experiment in style and function.

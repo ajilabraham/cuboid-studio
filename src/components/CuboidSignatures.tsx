@@ -7,11 +7,11 @@ import Image from 'next/image';
 const projects = [
     {
         id: 1,
-        title: "THE MALABAR BISTRO — KERALA",
-        image: "/images/signatures/heritage-bistro.jpg",
-        description: "A nostalgic reinvention of the classic bistro. Checkered floors meet traditional Kerala mural art, creating a space that honors local heritage while serving contemporary culinary experiences. The lighting design highlights the intricate ceiling patterns.",
-        scope: "Interior Design, Art Curation, Lighting",
-        completion: "October 2023"
+        title: "MALABAR GOLD AND DIAMONDS — CANADA",
+        image: "/images/signatures/malabar-gold.jpg",
+        description: "A luxurious and expansive jewellery showroom designed to elevate the retail experience. The bright, illuminated interior features warm lighting, elegant display cases, and a sophisticated central lounge area perfectly reflecting the brand's premium identity.",
+        scope: "Retail Showroom, Interior Architecture",
+        completion: "2024"
     },
     {
         id: 2,
