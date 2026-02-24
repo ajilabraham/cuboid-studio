@@ -29,11 +29,14 @@ const ContactMap = () => {
     const isInteractingRef = useRef<boolean>(false);
     const currentHeadingRef = useRef<number>(0);
 
+    const [isMapLoaded, setIsMapLoaded] = useState(false);
+
     useEffect(() => {
         // Wait for custom elements to be defined before interaction
         const initMap = async () => {
-            if (typeof window !== 'undefined' && window.customElements.get('gmp-map-3d')) {
-                // Component defined
+            if (typeof window !== 'undefined') {
+                await window.customElements.whenDefined('gmp-map-3d');
+                setIsMapLoaded(true);
             }
         };
         initMap();
@@ -102,7 +105,7 @@ const ContactMap = () => {
                     endCamera: {
                         center: { lat: loc.lat, lng: loc.lng, altitude: 0 },
                         tilt: 55, // Higher tilt for a more dramatic hero look
-                        range: 800,
+                        range: 400, // Zoom in closer (smaller range = closer)
                         heading: 0,
                     },
                     durationMillis: 2000,
@@ -132,23 +135,27 @@ const ContactMap = () => {
                   Since React 19 natively supports Custom Elements, but TypeScript might not know about them, 
                   we use React.createElement to bypass strict JSX compilation errors while successfully injecting the component. 
                 */}
-                {React.createElement(
+                {isMapLoaded ? React.createElement(
                     'gmp-map-3d',
                     {
                         ref: mapRef,
-                        center: `${selectedLocation.lat},${selectedLocation.lng},0`,
-                        tilt: "55",
-                        heading: "0",
-                        range: "800",
+                        center: { lat: selectedLocation.lat, lng: selectedLocation.lng, altitude: 0 },
+                        tilt: 55,
+                        heading: 0,
+                        range: 400,
                         "default-labels-disabled": true,
                         style: { width: '100%', height: '100%', display: 'block' }
                     },
                     LOCATIONS.map(loc =>
                         React.createElement('gmp-map-3d-marker', {
                             key: loc.id,
-                            position: `${loc.lat},${loc.lng},0`
+                            position: { lat: loc.lat, lng: loc.lng, altitude: 0 }
                         })
                     )
+                ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-[#121212] border border-white/5 animate-pulse">
+                        <p className="text-[#FFB800] uppercase font-bold tracking-widest text-sm text-center">Loading 3D Map Lab...</p>
+                    </div>
                 )}
             </div>
 
