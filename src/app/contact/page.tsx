@@ -19,7 +19,7 @@ export default function ContactUs() {
             <PageHeader
                 titlePrefix="Get in"
                 titleHighlight="Touch"
-                description="Find our global design labs above or drop us a message."
+                description="Select a destination below to fly into our global design labs, or drop us a message to start your project."
                 align="left"
                 customPadding="pt-16 pb-12"
             />
