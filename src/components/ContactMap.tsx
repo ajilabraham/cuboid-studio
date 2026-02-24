@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from 'react';
 const LOCATIONS = [
     {
         id: 'canada',
-        name: 'Cuboid Studio Canada',
+        name: 'Country Lab Interiors, Canada',
         lat: 43.583847,
         lng: -79.644185,
         address: 'Unit 40, 3883 Quartz Rd, Mississauga, ON L5B 0M4',
@@ -13,7 +13,7 @@ const LOCATIONS = [
     },
     {
         id: 'dubai',
-        name: 'Cuboid Studio Dubai',
+        name: 'Country Lab Interiors, Dubai',
         lat: 25.317017,
         lng: 55.345453,
         address: 'Level 14, Boulevard Plaza Tower 1, Downtown Dubai',
@@ -185,7 +185,7 @@ const ContactMap = () => {
                                 : 'bg-black/50 text-white hover:bg-white/20 border border-white/20'
                                 }`}
                         >
-                            {loc.name.replace('Cuboid Studio ', '')}
+                            {loc.name.replace('Country Lab Interiors, ', '')}
                         </button>
                     ))}
                 </div>
