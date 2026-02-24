@@ -19,12 +19,25 @@ const EnquiryForm = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
-        // Simulate API call
+
+        // Construct email body
+        const subject = encodeURIComponent(`New Project Enquiry from ${formData.name}`);
+        const body = encodeURIComponent(`
+Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone}
+
+Message:
+${formData.message}
+        `.trim());
+
+        // Open mail client
+        window.location.href = `mailto:info@countrylabinteriors.com?subject=${subject}&body=${body}`;
+
         setTimeout(() => {
             setIsSubmitting(false);
-            alert('Thank you for your enquiry. We will get back to you shortly.');
             setFormData({ name: '', email: '', phone: '', message: '' });
-        }, 1500);
+        }, 500);
     };
 
     return (

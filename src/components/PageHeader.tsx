@@ -7,11 +7,15 @@ interface PageHeaderProps {
     titlePrefix: string;
     titleHighlight: string;
     description: string;
+    align?: 'center' | 'left';
+    customPadding?: string;
 }
 
-export default function PageHeader({ titlePrefix, titleHighlight, description }: PageHeaderProps) {
+export default function PageHeader({ titlePrefix, titleHighlight, description, align = 'center', customPadding = 'pt-32 pb-12' }: PageHeaderProps) {
+    const alignClass = align === 'center' ? 'items-center text-center' : 'items-start text-left';
+
     return (
-        <div className="w-full pt-32 pb-12 flex flex-col items-center justify-center text-center px-6 relative z-20">
+        <div className={`w-full max-w-7xl mx-auto ${customPadding} flex flex-col ${alignClass} px-6 relative z-20`}>
             <motion.h1
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}

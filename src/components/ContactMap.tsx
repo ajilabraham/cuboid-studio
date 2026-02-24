@@ -9,7 +9,7 @@ const LOCATIONS = [
         lng: -79.644185,
         address: 'Unit 40, 3883 Quartz Rd, Mississauga, ON L5B 0M4',
         phone: '+1 (416) 555-0198',
-        email: 'canada@cuboidstudio.com',
+        email: 'canada@countrylabinteriors.com',
     },
     {
         id: 'dubai',
@@ -18,7 +18,7 @@ const LOCATIONS = [
         lng: 55.345453,
         address: 'Level 14, Boulevard Plaza Tower 1, Downtown Dubai',
         phone: '+971 4 555 0199',
-        email: 'dubai@cuboidstudio.com',
+        email: 'dubai@countrylabinteriors.com',
     }
 ];
 
@@ -28,6 +28,7 @@ const ContactMap = () => {
     const animationFrameRef = useRef<number | null>(null);
     const isInteractingRef = useRef<boolean>(false);
     const currentHeadingRef = useRef<number>(0);
+    const animationSequenceIdRef = useRef<number>(0);
 
     const [isMapLoaded, setIsMapLoaded] = useState(false);
 
@@ -87,34 +88,55 @@ const ContactMap = () => {
         };
     }, []);
 
-    const handleLocationSelect = async (loc: typeof LOCATIONS[0]) => {
+    const handleLocationSelect = (loc: typeof LOCATIONS[0]) => {
         setSelectedLocation(loc);
 
-        // Animate camera to the new location
         if (mapRef.current) {
             const gmpMap3d = mapRef.current;
-
-            // Sync our local tracking degree so the rotation resumes smoothly from the new angle
             currentHeadingRef.current = 0;
 
-            if (typeof gmpMap3d.flyCameraTo === 'function') {
-                // Pause rotation during the flight
-                isInteractingRef.current = true;
+            // Cancel any ongoing sequence by incrementing the ID
+            const currentSeq = ++animationSequenceIdRef.current;
 
+            if (typeof gmpMap3d.flyCameraTo === 'function') {
+                isInteractingRef.current = true; // Pause auto-rotation
+
+                const runStep = (fn: () => void, delay: number) => {
+                    setTimeout(() => {
+                        // Only execute if sequence hasn't been interrupted by user interaction
+                        if (animationSequenceIdRef.current === currentSeq) {
+                            fn();
+                        }
+                    }, delay);
+                };
+
+                // 1) Smoothly rotate 360 from space (Range 20,000,000)
                 gmpMap3d.flyCameraTo({
-                    endCamera: {
-                        center: { lat: loc.lat, lng: loc.lng, altitude: 0 },
-                        tilt: 55, // Higher tilt for a more dramatic hero look
-                        range: 400, // Zoom in closer (smaller range = closer)
-                        heading: 0,
-                    },
-                    durationMillis: 2000,
+                    endCamera: { center: { lat: loc.lat, lng: loc.lng, altitude: 0 }, tilt: 0, range: 20000000, heading: 360 },
+                    durationMillis: 3000,
                 });
 
-                // Resume auto-rotation shortly after flight finishes
-                setTimeout(() => {
+                // 2) Smooth zoom to district level
+                runStep(() => {
+                    gmpMap3d.flyCameraTo({
+                        endCamera: { center: { lat: loc.lat, lng: loc.lng, altitude: 0 }, tilt: 45, range: 6000, heading: 0 },
+                        durationMillis: 3500,
+                    });
+                }, 3000);
+
+                // 3) Wait 1 second (3000 + 3500 + 1000 = 7500ms), then Birds Eye View
+                runStep(() => {
+                    gmpMap3d.flyCameraTo({
+                        endCamera: { center: { lat: loc.lat, lng: loc.lng, altitude: 0 }, tilt: 60, range: 1000, heading: 45 },
+                        durationMillis: 3000,
+                    });
+                }, 7500);
+
+                // 4) Resume auto-rotation
+                runStep(() => {
+                    currentHeadingRef.current = 45; // Sync heading
                     isInteractingRef.current = false;
-                }, 2500);
+                }, 10500); // 7500 + 3000
             }
         }
     };
@@ -135,7 +157,10 @@ const ContactMap = () => {
             {/* 3D Map Container */}
             <div
                 className="w-full h-full absolute inset-0 cursor-grab active:cursor-grabbing"
-                onPointerDown={() => { isInteractingRef.current = true; }}
+                onPointerDown={() => {
+                    isInteractingRef.current = true;
+                    animationSequenceIdRef.current += 1; // Cancel fly-in sequence if user interacts
+                }}
                 onPointerUp={() => {
                     // Add a slight delay before resuming rotation feeling natural
                     setTimeout(() => { isInteractingRef.current = false; }, 1500);
@@ -155,17 +180,32 @@ const ContactMap = () => {
                         heading: 0,
                         range: 20000000, // 20,000km starting range to show full Earth
                         mode: 'HYBRID', // Required by recent API updates to avoid infinite spinner
-                        "default-labels-disabled": true,
+                        defaultUIHidden: false, // Ensure controls are visible/expanded by default
+                        "default-labels-disabled": false,
                         style: { width: '100%', height: '100%', display: 'block' }
                     },
-                    LOCATIONS.map(loc =>
+                    LOCATIONS.flatMap(loc => [
+                        // Custom red extrusion line
+                        React.createElement('gmp-polyline-3d', {
+                            key: `line-${loc.id}`,
+                            altitudeMode: 'RELATIVE_TO_GROUND',
+                            strokeColor: '#ea4335',
+                            strokeWidth: 6,
+                            drawsOccludedSegments: true, // Always visible through 3D meshes
+                            coordinates: [
+                                { lat: loc.lat, lng: loc.lng, altitude: 400 },
+                                { lat: loc.lat, lng: loc.lng, altitude: 0 }
+                            ]
+                        }),
+                        // Google Pin at the top
                         React.createElement('gmp-marker-3d', {
                             key: loc.id,
-                            position: { lat: loc.lat, lng: loc.lng, altitude: 150 },
+                            position: { lat: loc.lat, lng: loc.lng, altitude: 400 },
                             altitudeMode: 'RELATIVE_TO_GROUND',
-                            extruded: true
+                            extruded: false, // Turn off native grey extrusion
+                            color: '#ea4335' // Standard Google pin red
                         })
-                    )
+                    ])
                 ) : (
                     <div className="w-full h-full flex items-center justify-center bg-[#121212] border border-white/5 animate-pulse">
                         <p className="text-[#FFB800] uppercase font-bold tracking-widest text-sm text-center">Loading 3D Map Lab...</p>

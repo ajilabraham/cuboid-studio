@@ -20,6 +20,8 @@ export default function ContactUs() {
                 titlePrefix="Get in"
                 titleHighlight="Touch"
                 description="Find our global design labs above or drop us a message."
+                align="left"
+                customPadding="pt-16 pb-12"
             />
 
             {/* 3D Map Hero section */}
