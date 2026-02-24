@@ -119,6 +119,17 @@ const ContactMap = () => {
         }
     };
 
+    // Trigger initial fly-in animation from space
+    useEffect(() => {
+        if (isMapLoaded && mapRef.current) {
+            // Slight delay so the user actually sees the full globe before the camera moves
+            const timer = setTimeout(() => {
+                handleLocationSelect(selectedLocation);
+            }, 1500);
+            return () => clearTimeout(timer);
+        }
+    }, [isMapLoaded]);
+
     return (
         <div className="w-full h-full bg-[#050505] relative" suppressHydrationWarning>
             {/* 3D Map Container */}
@@ -140,17 +151,19 @@ const ContactMap = () => {
                     {
                         ref: mapRef,
                         center: { lat: selectedLocation.lat, lng: selectedLocation.lng, altitude: 0 },
-                        tilt: 55,
+                        tilt: 0, // Start looking flat down for a globe view
                         heading: 0,
-                        range: 400,
+                        range: 20000000, // 20,000km starting range to show full Earth
                         mode: 'HYBRID', // Required by recent API updates to avoid infinite spinner
                         "default-labels-disabled": true,
                         style: { width: '100%', height: '100%', display: 'block' }
                     },
                     LOCATIONS.map(loc =>
-                        React.createElement('gmp-map-3d-marker', {
+                        React.createElement('gmp-marker-3d', {
                             key: loc.id,
-                            position: { lat: loc.lat, lng: loc.lng, altitude: 0 }
+                            position: { lat: loc.lat, lng: loc.lng, altitude: 150 },
+                            altitudeMode: 'RELATIVE_TO_GROUND',
+                            extruded: true
                         })
                     )
                 ) : (
