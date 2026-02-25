@@ -31,15 +31,6 @@ const Responsibility = () => {
                         <p className="text-gray-500 dark:text-gray-400 font-light leading-relaxed mb-10">
                             A space is only as good as its touchpoints. We offer specialized design for custom lighting fixtures and furniture pieces that are exclusive to each Country Lab project.
                         </p>
-                        <button className="flex items-center gap-3 font-semibold uppercase text-xs tracking-[0.2em] group text-[#1F2937] dark:text-white">
-                            Explore Our Design Lab
-                            <span className="group-hover:translate-x-1 transition-transform">
-                                {/* Arrow Right SVG */}
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                                </svg>
-                            </span>
-                        </button>
                     </div>
                 </div>
             </div>

@@ -7,43 +7,38 @@ import Image from 'next/image';
 const projects = [
     {
         id: 1,
-        title: "MALABAR GOLD AND DIAMONDS — CANADA",
         image: "/images/signatures/malabar-gold.jpg",
-        description: "A luxurious and expansive jewellery showroom designed to elevate the retail experience. The bright, illuminated interior features warm lighting, elegant display cases, and a sophisticated central lounge area perfectly reflecting the brand's premium identity.",
+        description: "From private estates to retail complexes, our expertise in contemporary design ensures every space we touch exudes timeless elegance and class.",
         scope: "Retail Showroom, Interior Architecture",
         completion: "2024"
     },
     {
         id: 2,
-        title: "SKYLINE PENTHOUSE — ONTARIO",
         image: "/images/signatures/condo-living.jpg",
-        description: "Modern luxury defined by clean lines and panoramic views. This Toronto residence uses a cool color palette with deep red accents to create warmth in a high-rise setting. The custom circular light fixture serves as a sculptural centerpiece.",
+        description: "Our studio sets new industry benchmarks by seamlessly merging artistry with meticulous execution across residential and commercial projects.",
         scope: "Residential Interiors, Custom Furniture",
         completion: "February 2024"
     },
     {
-        id: 3,
-        title: "THE OPEN COURTYARD — KERALA",
-        image: "/images/signatures/courtyard-lounge.jpg",
-        description: "Blurring the lines between indoors and outdoors. This airy lounge features a cascading green ceiling and industrial-chic metalwork. Large-scale wall art adds vibrancy, making it a dynamic social hub in the heart of the city.",
-        scope: "Commercial Architecture, Landscape Integration",
-        completion: "December 2023"
-    },
-    {
         id: 4,
-        title: "VERDANT DINING — KERALA",
         image: "/images/signatures/green-dining.jpg",
-        description: "A celebration of texture and tone. The geometric wall paneling in sage green complements the warm wood tones and patterned upholstery. It's a study in balancing acoustic comfort with visual sophistication.",
+        description: "We prioritize a balanced approach where sophisticated aesthetics fuse with functional comfort, enhancing the entire living environment.",
         scope: "Interior Architecture, Bespoke Joinery",
         completion: "January 2024"
     },
     {
         id: 5,
-        title: "TWILIGHT LOUNGE — KERALA",
-        image: "/images/signatures/night-patio.jpg",
-        description: "An atmospheric evening retreat. The traditional timber ceiling structure contrasts with the modern chalkboard art wall. Low-level ambient lighting creates an intimate mood perfect for conversation and relaxation.",
-        scope: "Hospitality Design, Structural Styling",
-        completion: "November 2023"
+        image: "/images/signatures/showroom-lounge.jpg",
+        description: "Elevating every space through personalized design, seamless execution, and the pursuit of timeless sophistication.",
+        scope: "Commercial Architecture, Interior Design",
+        completion: "2024"
+    },
+    {
+        id: 6,
+        image: "/images/signatures/showroom-interior.jpg",
+        description: "We transcend blueprints by crafting personalized design solutions tailored to the unique tastes and lifestyles of our clients.",
+        scope: "Retail Showroom, Custom Fit-outs",
+        completion: "2024"
     }
 ];
 
@@ -160,7 +155,7 @@ const CuboidSignatures = () => {
                                     <div className="relative w-full h-full overflow-hidden border-4 border-white">
                                         <Image
                                             src={project.image}
-                                            alt={project.title}
+                                            alt={`Project ${project.id}`}
                                             fill
                                             className="object-cover"
                                         />
@@ -187,21 +182,12 @@ const CuboidSignatures = () => {
                         >
                             {/* Left Content */}
                             <div className="md:col-span-4">
-                                <h3 className="text-[#FFB800] text-xl md:text-2xl font-serif mb-3 uppercase tracking-wider leading-tight">
-                                    {activeProject.title}
-                                </h3>
+
                                 <p className="text-gray-300 leading-relaxed text-sm font-light mb-4 max-w-2xl">
                                     {activeProject.description}
                                 </p>
 
-                                <div className="flex gap-6 items-center">
-                                    <button className="text-[#FFB800] font-bold text-xs tracking-widest uppercase hover:text-white transition-colors duration-300 flex items-center gap-2">
-                                        View Case Study
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-3">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                                        </svg>
-                                    </button>
-                                </div>
+
                             </div>
 
                             {/* Right Metadata */}
