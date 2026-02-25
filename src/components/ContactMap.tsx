@@ -213,9 +213,9 @@ const ContactMap = () => {
                 )}
             </div>
 
-            {/* Location Navigation Overlay (Bottom Right) */}
-            <div className="absolute bottom-12 right-6 md:right-12 z-30 flex flex-col items-end pointer-events-none">
-                <div className="flex gap-2 mb-4 pointer-events-auto">
+            {/* Location Navigation Overlay */}
+            <div className="absolute bottom-4 md:bottom-12 left-4 right-4 md:left-auto md:right-12 z-30 flex flex-col md:items-end pointer-events-none">
+                <div className="flex justify-end gap-2 mb-2 md:mb-4 pointer-events-auto">
                     {LOCATIONS.map(loc => (
                         <button
                             key={loc.id}
@@ -230,10 +230,10 @@ const ContactMap = () => {
                     ))}
                 </div>
 
-                <div className="bg-black/40 backdrop-blur-md border border-white/10 p-6 rounded-sm text-right pointer-events-auto max-w-sm">
-                    <h4 className="text-xl font-serif text-white uppercase drop-shadow-md">{selectedLocation.name}</h4>
-                    <p className="text-gray-300 font-light text-sm mt-2">{selectedLocation.address}</p>
-                    <div className="flex flex-col gap-1 mt-3 text-sm">
+                <div className="bg-black/60 md:bg-black/40 backdrop-blur-md border border-white/10 p-3 md:p-6 rounded-sm text-center md:text-right pointer-events-auto w-full md:w-auto md:max-w-sm">
+                    <h4 className="text-xs md:text-xl font-serif text-white uppercase drop-shadow-md">{selectedLocation.name}</h4>
+                    <p className="text-gray-300 font-light text-[10px] md:text-sm mt-1 md:mt-2">{selectedLocation.address}</p>
+                    <div className="flex flex-row md:flex-col justify-center md:justify-end gap-4 md:gap-1 mt-2 md:mt-3 text-[10px] md:text-sm">
                         <a href={`tel:${selectedLocation.phone}`} className="text-[#FFB800] hover:text-white transition-colors">{selectedLocation.phone}</a>
                         <a href={`mailto:${selectedLocation.email}`} className="text-gray-400 hover:text-white transition-colors">{selectedLocation.email}</a>
                     </div>

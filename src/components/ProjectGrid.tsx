@@ -7,15 +7,6 @@ const ProjectGrid = () => {
             <div className="max-w-7xl mx-auto px-6">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-20">
                     <h2 className="text-5xl md:text-7xl font-serif">Featured Projects</h2>
-                    <div className="flex items-center gap-4 text-sm font-semibold uppercase tracking-widest text-[#EAB308]">
-                        <a className="hover:underline" href="#">View All Works</a>
-                        <span className="material-symbols-outlined">
-                            {/* Arrow Outward SVG */}
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
-                            </svg>
-                        </span>
-                    </div>
                 </div>
 
                 <div className="grid md:grid-cols-12 gap-8">
@@ -56,23 +47,23 @@ const ProjectGrid = () => {
 
                     {/* Showreel Video & Gallery Split */}
                     <div className="md:col-span-12 flex flex-col lg:flex-row gap-8 mt-8">
-                        
+
                         {/* Fixed Size Left Player */}
                         <div className="w-full lg:w-[478px] h-[850px] shrink-0 group cursor-pointer relative overflow-hidden rounded-2xl bg-gray-900 border border-gray-800">
-                            <video 
-                                autoPlay 
-                                loop 
-                                muted 
+                            <video
+                                autoPlay
+                                loop
+                                muted
                                 playsInline
                                 className="object-cover w-full h-full opacity-80 group-hover:opacity-100 transition-opacity duration-700"
                             >
                                 <source src="/videos/ShowReel.mp4" type="video/mp4" />
                             </video>
-                            
+
                             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                                 <div className="w-16 h-16 rounded-full border border-white/30 backdrop-blur-md bg-white/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-white/20 transition-all duration-500">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-white ml-1">
-                                      <path fillRule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z" clipRule="evenodd" />
+                                        <path fillRule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z" clipRule="evenodd" />
                                     </svg>
                                 </div>
                             </div>
