@@ -127,15 +127,15 @@ const CuboidSignatures = () => {
                     <div className="w-16 h-1 bg-[#FFB800] mx-auto"></div>
                 </div>
 
-                {/* 3D Carousel Area - Landscape Optimized */}
-                <div className="relative h-[250px] md:h-[350px] flex items-center justify-center perspective-1000 mb-[-40px] md:mb-[-80px]">
+                {/* --- DESKTOP VIEW: 3D Carousel (Hidden on Mobile) --- */}
+                <div className="hidden md:flex relative h-[350px] items-center justify-center perspective-1000 mb-[-80px]">
                     <div className="relative w-full max-w-6xl h-full flex items-center justify-center">
                         {projects.map((project, index) => {
                             const style = getStyleForIndex(index);
                             return (
                                 <motion.div
                                     key={project.id}
-                                    className="absolute w-[280px] md:w-[480px] aspect-[16/10] rounded-sm shadow-2xl cursor-pointer bg-white"
+                                    className="absolute w-[480px] aspect-[16/10] rounded-sm shadow-2xl cursor-pointer bg-white"
                                     animate={{
                                         x: style.x,
                                         scale: style.scale,
@@ -165,11 +165,40 @@ const CuboidSignatures = () => {
                         })}
                     </div>
                 </div>
+
+                {/* --- MOBILE VIEW: Horizontal Scroll Snap Cards (Hidden on Desktop) --- */}
+                <div className="md:hidden flex overflow-x-auto snap-x snap-mandatory gap-4 pb-8 mb-4 px-4 -mx-4 hide-scrollbar">
+                    {projects.map((project, index) => (
+                        <div
+                            key={project.id}
+                            className="relative min-w-[85vw] snap-center aspect-[4/5] rounded-2xl overflow-hidden shadow-xl"
+                            onClick={() => handleCardClick(index)}
+                        >
+                            <Image
+                                src={project.image}
+                                alt={`Project ${project.id}`}
+                                fill
+                                className="object-cover"
+                            />
+                            {/* Gradient Overlay for Text Readability */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+
+                            {/* Card Content Overlay */}
+                            <div className="absolute bottom-0 left-0 right-0 p-5 text-white pointer-events-none">
+                                <h3 className="text-xl font-serif mb-2">{project.scope}</h3>
+                                <p className="text-sm text-gray-200 line-clamp-3 mb-4">{project.description}</p>
+                                <div className="flex justify-between items-center text-xs font-medium uppercase tracking-wider text-[#FFB800]">
+                                    <span>{project.completion}</span>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
 
-            {/* Dark Details Panel - Extra Wide & Low Profile */}
-            <div className="relative z-20 mx-auto max-w-6xl px-4">
-                <div className="bg-[#18181B] text-white rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden border border-white/5">
+            {/* Dark Details Panel - Desktop Only */}
+            <div className="hidden md:block relative z-20 mx-auto max-w-6xl px-4">
+                <div className="bg-[#18181B] text-white rounded-2xl p-8 shadow-2xl relative overflow-hidden border border-white/5">
 
                     <AnimatePresence mode='wait'>
                         <motion.div
@@ -191,8 +220,8 @@ const CuboidSignatures = () => {
                             </div>
 
                             {/* Right Metadata */}
-                            <div className="md:col-span-2 flex flex-col justify-center border-l-0 md:border-l border-white/10 pt-4 md:pt-0 md:pl-6 space-y-4">
-                                <div className="grid grid-cols-2 md:grid-cols-1 gap-4">
+                            <div className="md:col-span-2 flex flex-col justify-center border-l border-white/10 pl-6 space-y-4">
+                                <div className="grid grid-cols-1 gap-4">
                                     <div>
                                         <h4 className="text-[#FFB800] text-[10px] font-bold uppercase tracking-widest mb-1">Scope</h4>
                                         <p className="text-gray-400 font-light leading-tight text-xs">{activeProject.scope}</p>
@@ -204,7 +233,7 @@ const CuboidSignatures = () => {
                                 </div>
 
                                 {/* Navigation UI */}
-                                <div className="flex gap-2 justify-start md:justify-end">
+                                <div className="flex gap-2 justify-end">
                                     <div className="flex gap-2">
                                         <button
                                             onClick={handlePrev}
