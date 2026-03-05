@@ -45,7 +45,20 @@ const projects = [
 const CuboidSignatures = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const containerRef = React.useRef(null);
+    const scrollContainerRef = React.useRef<HTMLDivElement>(null);
     const isInView = useInView(containerRef, { margin: "-20%" }); // Removed once: true so it triggers on scroll up/down
+
+    const scrollLeft = () => {
+        if (scrollContainerRef.current) {
+            scrollContainerRef.current.scrollBy({ left: -window.innerWidth * 0.8, behavior: "smooth" });
+        }
+    };
+
+    const scrollRight = () => {
+        if (scrollContainerRef.current) {
+            scrollContainerRef.current.scrollBy({ left: window.innerWidth * 0.8, behavior: "smooth" });
+        }
+    };
 
     const handleNext = () => {
         setCurrentIndex((prev) => (prev + 1) % projects.length);
@@ -167,32 +180,55 @@ const CuboidSignatures = () => {
                 </div>
 
                 {/* --- MOBILE VIEW: Horizontal Scroll Snap Cards (Hidden on Desktop) --- */}
-                <div className="md:hidden flex overflow-x-auto snap-x snap-mandatory gap-4 pb-8 mb-4 px-4 -mx-4 hide-scrollbar">
-                    {projects.map((project, index) => (
-                        <div
-                            key={project.id}
-                            className="relative min-w-[85vw] snap-center aspect-[4/5] rounded-2xl overflow-hidden shadow-xl"
-                            onClick={() => handleCardClick(index)}
-                        >
-                            <Image
-                                src={project.image}
-                                alt={`Project ${project.id}`}
-                                fill
-                                className="object-cover"
-                            />
-                            {/* Gradient Overlay for Text Readability */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+                <div className="md:hidden relative -mx-4 mb-4">
+                    {/* Left/Right Navigation Arrows for Mobile */}
+                    <button
+                        onClick={scrollLeft}
+                        aria-label="Scroll left"
+                        className="absolute left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center bg-white/20 backdrop-blur-md text-white rounded-full shadow-lg border border-white/40 hover:bg-white/40 transition-colors"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                        </svg>
+                    </button>
 
-                            {/* Card Content Overlay */}
-                            <div className="absolute bottom-0 left-0 right-0 p-5 text-white pointer-events-none">
-                                <h3 className="text-xl font-serif mb-2">{project.scope}</h3>
-                                <p className="text-sm text-gray-200 line-clamp-3 mb-4">{project.description}</p>
-                                <div className="flex justify-between items-center text-xs font-medium uppercase tracking-wider text-[#FFB800]">
-                                    <span>{project.completion}</span>
+                    <button
+                        onClick={scrollRight}
+                        aria-label="Scroll right"
+                        className="absolute right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center bg-white/20 backdrop-blur-md text-white rounded-full shadow-lg border border-white/40 hover:bg-white/40 transition-colors"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                        </svg>
+                    </button>
+
+                    <div ref={scrollContainerRef} className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-8 px-4 hide-scrollbar">
+                        {projects.map((project, index) => (
+                            <div
+                                key={project.id}
+                                className="relative min-w-[85vw] snap-center aspect-[4/5] rounded-2xl overflow-hidden shadow-xl"
+                                onClick={() => handleCardClick(index)}
+                            >
+                                <Image
+                                    src={project.image}
+                                    alt={`Project ${project.id}`}
+                                    fill
+                                    className="object-cover"
+                                />
+                                {/* Gradient Overlay for Text Readability */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+
+                                {/* Card Content Overlay */}
+                                <div className="absolute bottom-0 left-0 right-0 p-5 text-white pointer-events-none">
+                                    <h3 className="text-xl font-serif mb-2">{project.scope}</h3>
+                                    <p className="text-sm text-gray-200 line-clamp-3 mb-4">{project.description}</p>
+                                    <div className="flex justify-between items-center text-xs font-medium uppercase tracking-wider text-[#FFB800]">
+                                        <span>{project.completion}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             </div>
 
