@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import Image from 'next/image';
 
@@ -47,6 +47,23 @@ const CuboidSignatures = () => {
     const containerRef = React.useRef(null);
     const scrollContainerRef = React.useRef<HTMLDivElement>(null);
     const isInView = useInView(containerRef, { margin: "-20%" }); // Removed once: true so it triggers on scroll up/down
+
+    const [canScrollLeft, setCanScrollLeft] = useState(false);
+    const [canScrollRight, setCanScrollRight] = useState(true);
+
+    const checkScrollPosition = () => {
+        if (scrollContainerRef.current) {
+            const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+            setCanScrollLeft(scrollLeft > 0);
+            setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 1); // -1 for sub-pixel flex tolerance
+        }
+    };
+
+    useEffect(() => {
+        checkScrollPosition();
+        window.addEventListener('resize', checkScrollPosition);
+        return () => window.removeEventListener('resize', checkScrollPosition);
+    }, []);
 
     const scrollLeft = () => {
         if (scrollContainerRef.current) {
@@ -185,7 +202,9 @@ const CuboidSignatures = () => {
                     <button
                         onClick={scrollLeft}
                         aria-label="Scroll left"
-                        className="absolute left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center bg-white/20 backdrop-blur-md text-white rounded-full shadow-lg border border-white/40 hover:bg-white/40 transition-colors"
+                        disabled={!canScrollLeft}
+                        className={`absolute left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center bg-white/20 backdrop-blur-md text-white rounded-full shadow-lg border border-white/40 transition-all duration-300 ${canScrollLeft ? 'hover:bg-white/40 opacity-100' : 'opacity-0 pointer-events-none'
+                            }`}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -195,14 +214,20 @@ const CuboidSignatures = () => {
                     <button
                         onClick={scrollRight}
                         aria-label="Scroll right"
-                        className="absolute right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center bg-white/20 backdrop-blur-md text-white rounded-full shadow-lg border border-white/40 hover:bg-white/40 transition-colors"
+                        disabled={!canScrollRight}
+                        className={`absolute right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center bg-white/20 backdrop-blur-md text-white rounded-full shadow-lg border border-white/40 transition-all duration-300 ${canScrollRight ? 'hover:bg-white/40 opacity-100' : 'opacity-0 pointer-events-none'
+                            }`}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                         </svg>
                     </button>
 
-                    <div ref={scrollContainerRef} className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-8 px-4 hide-scrollbar">
+                    <div
+                        ref={scrollContainerRef}
+                        onScroll={checkScrollPosition}
+                        className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-8 px-4 hide-scrollbar"
+                    >
                         {projects.map((project, index) => (
                             <div
                                 key={project.id}
