@@ -5,11 +5,11 @@ const LOCATIONS = [
     {
         id: 'canada',
         name: 'Country Lab Interiors, Canada',
-        lat: 43.583847,
-        lng: -79.644185,
-        address: 'Unit 40, 3883 Quartz Rd, Mississauga, ON L5B 0M4',
+        lat: 43.6701382990375,
+        lng: -79.38987974774517,
+        address: '1200 Bay St. unit 1201, Toronto, ON M5R 2A5, Canada.',
         phone: '+1 (416) 555-0198',
-        email: 'canada@countrylabinteriors.com',
+        email: 'info@countrylabinteriors.com',
     },
     {
         id: 'dubai',
@@ -120,23 +120,32 @@ const ContactMap = () => {
                 runStep(() => {
                     gmpMap3d.flyCameraTo({
                         endCamera: { center: { lat: loc.lat, lng: loc.lng, altitude: 0 }, tilt: 45, range: 6000, heading: 0 },
-                        durationMillis: 3500,
+                        durationMillis: 2500,
                     });
                 }, 3000);
 
-                // 3) Wait 1 second (3000 + 3500 + 1000 = 7500ms), then Birds Eye View
+                // 3) Dive into Street Level to show exact pin drop
                 runStep(() => {
                     gmpMap3d.flyCameraTo({
-                        endCamera: { center: { lat: loc.lat, lng: loc.lng, altitude: 0 }, tilt: 60, range: 1000, heading: 45 },
+                        endCamera: { center: { lat: loc.lat, lng: loc.lng, altitude: 0 }, tilt: 75, range: 150, heading: 45 },
                         durationMillis: 3000,
                     });
-                }, 7500);
+                }, 5500);
 
-                // 4) Resume auto-rotation
+                // 4) Hold for 1s, then pull back to Panoramic City View
                 runStep(() => {
-                    currentHeadingRef.current = 45; // Sync heading
+                    gmpMap3d.flyCameraTo({
+                        // Offset target slightly so pin sits comfortably in the lower half of the screen
+                        endCamera: { center: { lat: loc.lat + 0.002, lng: loc.lng, altitude: 0 }, tilt: 65, range: 1000, heading: 90 },
+                        durationMillis: 3000,
+                    });
+                }, 9500);
+
+                // 5) Resume auto-rotation
+                runStep(() => {
+                    currentHeadingRef.current = 90; // Sync heading
                     isInteractingRef.current = false;
-                }, 10500); // 7500 + 3000
+                }, 12500);
             }
         }
     };
@@ -193,14 +202,14 @@ const ContactMap = () => {
                             strokeWidth: 6,
                             drawsOccludedSegments: true, // Always visible through 3D meshes
                             coordinates: [
-                                { lat: loc.lat, lng: loc.lng, altitude: 400 },
+                                { lat: loc.lat, lng: loc.lng, altitude: 150 },
                                 { lat: loc.lat, lng: loc.lng, altitude: 0 }
                             ]
                         }),
                         // Google Pin at the top
                         React.createElement('gmp-marker-3d', {
                             key: loc.id,
-                            position: { lat: loc.lat, lng: loc.lng, altitude: 400 },
+                            position: { lat: loc.lat, lng: loc.lng, altitude: 150 },
                             altitudeMode: 'RELATIVE_TO_GROUND',
                             extruded: false, // Turn off native grey extrusion
                             color: '#ea4335' // Standard Google pin red
